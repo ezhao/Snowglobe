@@ -1,9 +1,11 @@
 package com.herokuapp.ezhao.snowglobe;
 
+import android.graphics.Point;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.plattysoft.leonids.ParticleSystem;
 
 public class MainActivity extends FragmentActivity {
 
@@ -11,6 +13,21 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+
+        new ParticleSystem(this, 80, R.drawable.snowflake, 10000)
+                .setSpeedModuleAndAngleRange(0f, 0.3f, 180, 180)
+                .setRotationSpeed(144)
+                .setAcceleration(0.00005f, 90)
+                .emit(size.x + 10, -10, 8);
+
+        new ParticleSystem(this, 80, R.drawable.snowflake, 10000)
+                .setSpeedModuleAndAngleRange(0f, 0.3f, 0, 0)
+                .setRotationSpeed(144)
+                .setAcceleration(0.00005f, 90)
+                .emit(-10, -10, 8);
     }
 
     @Override
